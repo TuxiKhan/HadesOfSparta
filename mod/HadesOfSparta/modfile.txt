@@ -1,0 +1,15 @@
+:: HadesOfSparta — Kratos (God of War: Ghost of Sparta) hero mod
+::
+:: Phase 1: placeholder Kratos. Zagreus' sprites/animations are kept untouched;
+:: this mod only takes over the hero's weapon *in place* (SwordWeapon = Stygius)
+:: and applies placeholder Blades-of-Athena "feel". Internal weapon names are
+:: NEVER changed, so Olympian boons keep auto-attaching (DESIGN.md §4).
+::
+:: Load Priority 1 => loads AFTER ModUtil / StyxScribe (priority 0), so
+:: ModUtil.* is available when our files run.
+
+Load Priority 1
+To "Scripts/Main.lua"
+	Import "Config.lua"
+	Import "HeroKratos.lua"
+	Import "Weapons/Blades.lua"

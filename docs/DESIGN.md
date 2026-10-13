@@ -136,3 +136,10 @@ animation list and measure disk/VRAM before committing.
 0 discovery · 1 placeholder Kratos (Zagreus sprites, Kratos logic) · 2 frame data · 3 visual
 spike · 4 Blades + Thera's Bane · 5 Arms of Sparta · 6 magic + Rage · 7 polish & release.
 Each ends playable, with a Turkish report, and waits for approval.
+
+**Status:** Phase 0 ✅ complete. **Phase 1 ✅ complete (live-verified 2026-10-13):** mod
+skeleton built & installed (`mod/HadesOfSparta/` + `tools/install_mod.py`); overrides
+`SwordWeapon` family in place, boon-names untouched. Live in-game readback PASS via
+`tools/verify_phase1.py` (Active=true, Fraction 0.1→0.08, RightFraction 0.17→0.255).
+Evidence: `context/artifacts/2026-10-13/phase1-skeleton-FINAL.md`. Next gate: Phase 2
+(frame data — measure GoS move numbers via PPSSPP, fill `Config.lua` placeholders).

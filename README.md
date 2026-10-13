@@ -5,7 +5,9 @@ character inside **Hades (1)** — Hades' rooms, camera, enemies and boon/Mirror
 preserved, but the hero is Kratos and plays with Ghost of Sparta's combat (Blades of Athena,
 Arms of Sparta, magic, Rage of Sparta). Olympian boons keep working on Kratos' weapons.
 
-> ⚠️ **Status:** Early development (Phase 0 — discovery & design). Not yet playable.
+> ⚠️ **Status:** Early development. **Phase 1 ✅** — placeholder Kratos skeleton loads &
+> overrides Stygius in place (boon-compat preserved), live-verified in game. Next: Phase 2
+> (measure GoS frame data). Not yet playable as Kratos.
 
 ## What this repo is (and is not)
 
