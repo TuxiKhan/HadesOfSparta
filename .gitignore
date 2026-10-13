@@ -1,0 +1,42 @@
+# === HadesOfSparta — asla commit edilmeyecekler ===
+# Oyun dosyaları, ripped asset, decompile kod, retail offset tablosu YASAK.
+
+# Yerel araştırma notları, retail offset'ler, vendor araçları
+research/
+
+# Build çıktıları
+build/
+out/
+
+# Oyun/asset formatları
+*.pkg
+*.iso
+*.cso
+*.chd
+*.glb
+*.gltf
+*.bin
+
+# Render/asset çıktıları (tools/ altındaki kendi ikonlarımız HARİÇ)
+*.png
+*.jpg
+*.jpeg
+*.tga
+*.dds
+*.wav
+*.ogg
+!tools/**/*.png
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# PPSSPP-dfx yerel config (makineye özel mutlak yollar, offset'ler)
+.ppsspp-dfx/
+
+# OS / editor
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
