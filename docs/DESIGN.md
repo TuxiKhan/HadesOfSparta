@@ -147,3 +147,9 @@ discrete move-id — so frame-data extraction (startup/active/recovery → `data
 is the next focused step (cursor-threshold or behavioral/screenshot method). `Config.lua` Blades
 values stay placeholder until then. Retail addresses live only in gitignored `research/` +
 `.ppsspp-dfx/`. Evidence: `context/artifacts/2026-10-14/phase2-progress-FINAL.md`.
+**2026-10-15:** first real frame data — the anim cursor proved unusable as a timer, so the
+oracle switched to **PPSSPP frame dumps** (one video frame per emulated vblank → game-time
+exact) + `tools/framedata/video_metrics.py`. Blades □1–□4 (+ extended □5–10) and △1
+startup / visual-active / recovery are in `data/gos_framedata/blades.json`. Still open:
+damage, true hitbox frames, range, dodge/parry/dash. Evidence:
+`context/artifacts/2026-10-15/phase2-blades-framedata-FINAL.md`.

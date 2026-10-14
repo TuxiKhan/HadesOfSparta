@@ -1,0 +1,109 @@
+{
+  "weapon": "blades_of_athena",
+  "hades_target_family": "SwordWeapon",
+  "source": {
+    "game": "God of War: Ghost of Sparta",
+    "serial": "UCUS98737",
+    "measured_fps": 59.94,
+    "method": "PPSSPP frame dump (1 video frame per emulated vblank, FFV1) + tools/framedata/video_metrics.py (motion + blade-trail pixel metrics) + per-frame contact-sheet review. 2 runs, 2026-10-15. See context/artifacts/2026-10-15/phase2-blades-framedata-FINAL.md",
+    "frame_zero": "first frame of visible animation change (input latency NOT included: the dump has no input marker)",
+    "active_definition": "VISUAL PROXY: frames where the blade trail is visibly extended / sweeping. Real hitbox frames are not measured yet (needs a target)."
+  },
+  "moves": [
+    {
+      "id": "square_1",
+      "input": "Square",
+      "description": "forward chain thrust (both blades thrown straight ahead)",
+      "startup_frames": 11,
+      "active_frames": 15,
+      "recovery_frames": 3,
+      "total_frames_isolated": 30,
+      "hits": 1,
+      "damage": null,
+      "range": null,
+      "iframes": null,
+      "cancel_window": null,
+      "samples": {
+        "run1_tap_from_neutral": {"start": 262, "trail": [274, 288], "settled": 292},
+        "run1_combo_from_combat_stance": {"start": 361, "trail": [372, 387], "next_move_start": 388},
+        "run2_mash_with_turn": {"start": 264, "trail": [280, 291], "next_move_start": 292}
+      },
+      "notes": "startup 11 (combat stance) / 12 (neutral) / 16 (includes turning to face the target). Active 12-16. Isolated tap returns to combat stance at +30."
+    },
+    {
+      "id": "square_2",
+      "input": "Square (chained)",
+      "description": "backhand horizontal sweep",
+      "startup_frames": 4,
+      "active_frames": 8,
+      "recovery_frames": null,
+      "hits": 1,
+      "damage": null, "range": null, "iframes": null, "cancel_window": null,
+      "samples": {
+        "run1": {"start": 388, "trail": [392, 399], "next_move_start": 404},
+        "run2_mash": {"start": 292, "trail": [295, 300], "next_move_start": 301}
+      },
+      "notes": "chained-only move; start->next start 16 (run1) / 9 (mash)"
+    },
+    {
+      "id": "square_3",
+      "input": "Square (chained)",
+      "description": "low sweep",
+      "startup_frames": 4,
+      "active_frames": 9,
+      "recovery_frames": null,
+      "hits": 1,
+      "damage": null, "range": null, "iframes": null, "cancel_window": null,
+      "samples": {
+        "run1": {"start": 404, "trail": [408, 416], "next_move_start": 417},
+        "run2_mash": {"start": 301, "trail": [311, 319], "next_move_start": 320}
+      },
+      "notes": "run2 wind-up longer (10f) - the square_2 -> square_3 boundary is ambiguous under mash"
+    },
+    {
+      "id": "square_4",
+      "input": "Square (chained)",
+      "description": "big overhead arc (ends the string when no further input)",
+      "startup_frames": 4,
+      "active_frames": 12,
+      "recovery_frames": 9,
+      "hits": 1,
+      "damage": null, "range": null, "iframes": null, "cancel_window": null,
+      "samples": {
+        "run1_string_end": {"start": 417, "trail": [421, 432], "settled": 442},
+        "run2_mash": {"start": 320, "trail": [323, 337], "next_move_start": 338}
+      },
+      "notes": "largest trail of the first four hits; natural SwordWeapon3 (finisher) candidate"
+    },
+    {
+      "id": "square_5_to_10",
+      "input": "Square (continued mash)",
+      "description": "extended string seen only under continuous mashing: horizontal spin, sweep, rising vertical spin, diagonal overhead, wide horizontal circle, ground-slam finisher",
+      "trail_windows": [[340, 354], [360, 374], [377, 398], [399, 409], [413, 428], [431, 444]],
+      "settled": 459,
+      "trail_start_intervals_frames": [17, 20, 17, 22, 14, 18],
+      "hits": 6,
+      "damage": null, "range": null, "iframes": null, "cancel_window": null,
+      "notes": "run2 only (single sample). Whole 10-swing chain: first anim 264 -> settled 459 = 195 frames (~3.25 s). Trail-start interval mean for square_1..10 ~17 frames"
+    },
+    {
+      "id": "triangle_1",
+      "input": "Triangle",
+      "description": "heavy: blades raised, double overhead slam, then a low follow-through hit",
+      "startup_frames": 20,
+      "active_frames": 9,
+      "recovery_frames": 5,
+      "total_frames_isolated": 47,
+      "hits": 2,
+      "active_windows_relative": [[20, 28], [35, 41]],
+      "damage": null, "range": null, "iframes": null, "cancel_window": null,
+      "samples": {
+        "run2_tap": {"start": 527, "trail": [[547, 555], [562, 568]], "settled": 573},
+        "run2_mash": {"start": 678, "trail": [[697, 705], [712, 718]], "settled": 725}
+      },
+      "notes": "highly reproducible (both samples within 1 frame). Mashing Triangle does NOT chain a second heavy. SwordParry/Special candidate"
+    }
+  ],
+  "frame_to_seconds": 0.016683,
+  "hades_time_note": "Hades durations are in seconds; conversion applied in Phase 4 via Config.lua"
+}

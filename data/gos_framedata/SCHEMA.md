@@ -38,6 +38,13 @@ değerleri). **Retail bellek offset'leri burada DEĞİL** — onlar gitignored `
 }
 ```
 
+## Ek alanlar (blades.json ile eklendi, 2026-10-15)
+- `source.frame_zero` / `source.active_definition`: kare-0 ve "active" tanımı (ölçüm yöntemine bağlı).
+- `total_frames_isolated`: tek basışta ilk anim karesi → duruşa dönüş.
+- `samples`: ham örnekler (dump kare indeksleri; `trail` = görünür bıçak izi penceresi).
+- `active_windows_relative`: çok-vuruşlu hareketlerde kare-0'a göre [başla, bitir] listesi.
+- `trail_windows`, `trail_start_intervals_frames`: tek örnekli uzun dizeler için.
+
 ## Alan notları
 - `damage`/`range` ham GoS birimidir; Hades'e ölçekleme `mod/.../Config.lua` `Scale.*`
   üzerinden Phase 4'te yapılır (DESIGN §2: "Balance = config").

@@ -43,8 +43,8 @@ def to_png(path, out_dir, deswizzle=False, clutswap=False):
     pal = [b[0x20+j*4:0x20+j*4+4] for j in range(pal_n)]  # RGBA8888
     idx_bytes = w*h if fmt==5 else w*h//2
     data = b[doff:doff+idx_bytes]
-    if deswizzle:
-        wb = w if fmt==5 else w//2
+    wb = w if fmt==5 else w//2
+    if deswizzle and wb % 16 == 0 and h % 8 == 0:
         data = unswizzle(data, wb, h)
     rgba = bytearray(w*h*4)
     for i in range(w*h):
