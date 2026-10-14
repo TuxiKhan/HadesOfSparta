@@ -137,9 +137,13 @@ animation list and measure disk/VRAM before committing.
 spike · 4 Blades + Thera's Bane · 5 Arms of Sparta · 6 magic + Rage · 7 polish & release.
 Each ends playable, with a Turkish report, and waits for approval.
 
-**Status:** Phase 0 ✅ complete. **Phase 1 ✅ complete (live-verified 2026-10-13):** mod
-skeleton built & installed (`mod/HadesOfSparta/` + `tools/install_mod.py`); overrides
-`SwordWeapon` family in place, boon-names untouched. Live in-game readback PASS via
-`tools/verify_phase1.py` (Active=true, Fraction 0.1→0.08, RightFraction 0.17→0.255).
-Evidence: `context/artifacts/2026-10-13/phase1-skeleton-FINAL.md`. Next gate: Phase 2
-(frame data — measure GoS move numbers via PPSSPP, fill `Config.lua` placeholders).
+**Status:** Phase 0 ✅ · Phase 1 ✅ (live-verified 2026-10-13: `SwordWeapon` family overridden
+in place, boon-names untouched, in-game readback PASS). **Phase 2 🔄 in progress (2026-10-14):**
+the precondition — locating the GoS player struct — is **DONE**. After 3 sessions of failed
+*blind* discovery, a **CWCheat-seed + MCP pointer-chase** cracked it: the player stat struct is
+pointer-indirect, and **orbs (5× HUD match), current/max HP (damage + regen), magic and position**
+are verified live. The per-move animation state was also located but is a *playback cursor*, not a
+discrete move-id — so frame-data extraction (startup/active/recovery → `data/gos_framedata/*.json`)
+is the next focused step (cursor-threshold or behavioral/screenshot method). `Config.lua` Blades
+values stay placeholder until then. Retail addresses live only in gitignored `research/` +
+`.ppsspp-dfx/`. Evidence: `context/artifacts/2026-10-14/phase2-progress-FINAL.md`.

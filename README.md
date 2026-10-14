@@ -6,8 +6,9 @@ preserved, but the hero is Kratos and plays with Ghost of Sparta's combat (Blade
 Arms of Sparta, magic, Rage of Sparta). Olympian boons keep working on Kratos' weapons.
 
 > ⚠️ **Status:** Early development. **Phase 1 ✅** — placeholder Kratos skeleton loads &
-> overrides Stygius in place (boon-compat preserved), live-verified in game. Next: Phase 2
-> (measure GoS frame data). Not yet playable as Kratos.
+> overrides Stygius in place (boon-compat preserved), live-verified in game. **Phase 2 🔄** —
+> GoS player struct located & verified live (HP/orbs/magic/position) via a CWCheat-seeded
+> MCP pointer-chase; frame-data extraction is the next step. Not yet playable as Kratos.
 
 ## What this repo is (and is not)
 
