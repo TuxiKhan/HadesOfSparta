@@ -37,7 +37,7 @@ Hades .pkg via deppth2 (TODO)   [built on user's machine, NOT in repo]
 data/gos_framedata/*.json  (numbers only: frames, dmg, range, i-frames)   🔄 blades.json
         v
 mod/ (Lua + SJSON, modimporter format)
-   HeroKratos.lua · Weapons/{Blades,Spear,Shield}.lua · TherasBane.lua
+   HeroKratos.lua · Weapons/{Blades,Spear,Shield}.lua
    Magic.lua · RageOfSparta.lua · Hud.lua · Config.lua
 ```
 
@@ -147,7 +147,7 @@ animation list and measure disk/VRAM before committing.
 ## 9. Phase gates
 
 0 discovery · 1 placeholder Kratos (Zagreus sprites, Kratos logic) · 2 frame data · 3 visual
-spike · 4 Blades + Thera's Bane · 5 Arms of Sparta · 6 magic + Rage · 7 polish & release.
+spike · 4 Blades · 5 Arms of Sparta · 6 magic + Rage · 7 polish & release.
 Each ends playable, with a Turkish report, and waits for approval.
 
 **Status:** Phase 0 ✅ · Phase 1 ✅ (live-verified 2026-10-13: `SwordWeapon` family overridden
@@ -175,11 +175,11 @@ damage, true hitbox frames, range, dodge/parry/dash. Evidence:
 | 1 placeholder Kratos | SwordWeapon override live-verified | ✅ |
 | 2 frame data | GoS numbers for Blades in `data/gos_framedata/` | ✅ **done for Blades** (`context/artifacts/2026-10-15/phase2-FINAL-report.md`): timings, damage, evade ~45 f, deflect window 20→4 f before hit. Not measured: true hitbox frames, range, proven i-frames, input latency (not blocking Phase 4) |
 | 3 visual spike | capture method + silhouette oracle | 🔄 started early — method decided (GE capture), textured T-pose + posed Kratos mesh ✅ (rip fixed 10-15); **open:** skeleton hierarchy, animation clip capture, Blender render vs Zagreus silhouette/pivot, frame/VRAM budget |
-| **4 Blades + Thera's Bane** | playable Blades combo in Hades | 🔄 **Blades live-verified 2026-10-15** (`context/artifacts/2026-10-15/phase4-blades-FINAL.md`): measured startup/lock/damage written onto the `SwordWeapon` family per room, before traits (boons stack on top); engine readback PASS. **Open:** hands-on feel test, boon matrix, Thera's Bane (unmeasured + slot decision), deflect (→ Phase 5 with Aegis) |
+| **4 Blades** | playable Blades combo in Hades | 🔄 **Blades live-verified 2026-10-15** (`context/artifacts/2026-10-15/phase4-blades-FINAL.md`): measured startup/lock/damage written onto the `SwordWeapon` family per room, before traits (boons stack on top); engine readback PASS. **Open:** hands-on feel test, boon matrix, deflect (→ Phase 5 with Aegis) |
 | 5 Arms of Sparta · 6 magic + Rage · 7 polish | — | ⏳ |
 
 Next concrete steps: (1) hands-on feel test of the Blades combo + `docs/BOON_MATRIX.md`;
-(2) Thera's Bane — measure in GoS, then decide its Hades slot (touches §6 → needs approval).
+(2) Thera's Bane — **dropped (user, 2026-10-15)**: not part of the mod.
 Phase 3 visuals can proceed in parallel.
 
 **Mod load gotcha (2026-10-15):** gameplay wraps must be imported into

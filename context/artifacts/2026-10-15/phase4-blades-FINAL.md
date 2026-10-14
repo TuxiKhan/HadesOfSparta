@@ -72,7 +72,10 @@ incelenecek.
 - Deflect (GoS L, isabetten 20→4 f önce) Hades'e taşınmadı: Special slotu △'ya ayrıldı,
   Hades'te blok girişi yok → Aegis/kalkan (Phase 5) ile birlikte ele alınmalı.
 
-## 6. Thera's Bane — bekliyor
+## 6. Thera's Bane — KAPSAM DIŞI (kullanıcı kararı, 2026-10-15)
+
+Aşağıdaki not tarihsel; Thera's Bane moda eklenmeyecek.
+
 Phase 2'de ölçülmedi (blades.json'da yok). Gerekenler: (a) GoS'ta ölçüm (ateş-bıçak hasar
 çarpanı, metre tüketimi/dolumu, zırh kırma), (b) **slot kararı** — Hades'te ikinci bir metre
 yok; aday: Cast (`RangedWeapon`) veya God Gauge'siz bir buff durumu. DESIGN §6 kilitli

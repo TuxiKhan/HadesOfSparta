@@ -13,7 +13,7 @@ Arms of Sparta, magic, Rage of Sparta). Olympian boons keep working on Kratos' w
 > deflect window — Phase 2 done for Blades.
 > **Phase 4 🔄** — Blades of Athena live in Hades: measured GoS startup / combo lock / damage
 > are written onto Stygius (`SwordWeapon` family) every room, *before* boons apply, so boons
-> stack on top; engine readback PASS (`tools/verify_phase4.py`). Thera's Bane still to do.
+> stack on top; engine readback PASS (`tools/verify_phase4.py`). Next: hands-on feel test + boon matrix.
 > **Phase 3 (visual) 🔄 started early** — textured Kratos mesh (posed + T-pose) rips from a PPSSPP
 > GE dump on your machine; skeleton/animation/render still to do. Plan position: `docs/DESIGN.md` §9.1.
 > Not yet playable as Kratos.
