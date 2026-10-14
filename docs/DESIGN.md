@@ -173,11 +173,12 @@ damage, true hitbox frames, range, dodge/parry/dash. Evidence:
 |---|---|---|
 | 0 discovery | toolchains proven | ✅ |
 | 1 placeholder Kratos | SwordWeapon override live-verified | ✅ |
-| **2 frame data** | GoS numbers for Blades in `data/gos_framedata/` | 🔄 **current** — struct ✅, Blades □/△ timings ✅; **open:** damage, true hitbox frames, range, evade (L+R+stick), block/parry window (`def_block_parry`), dash-attack, input latency / combo window |
+| **2 frame data** | GoS numbers for Blades in `data/gos_framedata/` | 🔄 **current** — struct ✅, Blades □/△ timings ✅, **damage ✅** (2/hit, △ slam 6, □4 multi-tick), **evade ✅** (~45 f); **open:** true hitbox frames, range, parry window, evade i-frames, input latency / combo window (all need an incoming enemy attack) |
 | 3 visual spike | capture method + silhouette oracle | 🔄 started early — method decided (GE capture), textured T-pose + posed Kratos mesh ✅ (rip fixed 10-15); **open:** skeleton hierarchy, animation clip capture, Blender render vs Zagreus silhouette/pivot, frame/VRAM budget |
 | 4 Blades + Thera's Bane | playable Blades combo in Hades | ⏳ needs Phase 2 numbers (+ 3 for visuals) |
 | 5 Arms of Sparta · 6 magic + Rage · 7 polish | — | ⏳ |
 
-Next concrete step: an **enemy-scene save state** in GoS → same frame-dump method + enemy HP /
-orb deltas gives damage and real hit frames; then evade/parry. Phase 2 closes with a Turkish
-report + approval (§2).
+Next concrete step: a save state where a soldier is **mid-attack at Kratos** → parry window and
+evade i-frames (Kratos HP delta = hit/no-hit); hit frames from frame dump + enemy-HP timing.
+Phase 2 closes with a Turkish report + approval (§2). Evidence for damage/evade:
+`context/artifacts/2026-10-15/phase2-damage-evade-FINAL.md`.

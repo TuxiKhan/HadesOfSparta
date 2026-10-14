@@ -139,16 +139,18 @@ placeholder'ları ancak bu ölçümlerden sonra gerçek değerlerle değişir.
 Yöntem anim-imleci yerine **PPSSPP frame dump + video metrikleri** oldu (imleç monoton
 değil; `watch_value` ~2 karede bir örnekliyor). Ölçülen (görsel-active vekili, ±1–2 kare):
 
-| Hareket | Startup | Active | Toplam / zincir | Hades adayı |
-|---|---|---|---|---|
-| □1 ileri zincir-hamle | 11 | 12–16 | 30 (tek) | `SwordWeapon` |
-| □2 ters süpürme | 3–4 | 6–8 | zincir | `SwordWeapon2` |
-| □3 alçak süpürme | 4 | 9 | zincir | `SwordWeapon2` |
-| □4 tepe yayı (bitirici) | 3–4 | 12–15 | ~9 recovery | `SwordWeapon3` |
-| □5–10 (sürekli seri) | — | — | □1→duruş 195 | kapsam dışı |
-| △1 ağır (2 vuruş) | 20 | 9 + 7 | 47 | `SwordParry` |
+| Hareket | Startup | Active | Toplam / zincir | Hasar | Hades adayı |
+|---|---|---|---|---|---|
+| □1 ileri zincir-hamle | 11 | 12–16 | 30 (tek) | 2 (2 hedef) | `SwordWeapon` |
+| □2 ters süpürme | 3–4 | 6–8 | zincir | 2 | `SwordWeapon2` |
+| □3 alçak süpürme | 4 | 9 | zincir | 2 | `SwordWeapon2` |
+| □4 tepe yayı (bitirici) | 3–4 | 12–15 | ~9 recovery | 2/tick × 2–4, alan | `SwordWeapon3` |
+| □5–10 (sürekli seri) | — | — | □1→duruş 195 | — | kapsam dışı |
+| △1 ağır (2 vuruş) | 20 | 9 + 7 | 47 | 2 + 6 | `SwordParry` |
+| Kaçış (L+R+analog) | 2 | dalış ~19 | ~45 | — | `SwordWeaponDash` / Rush |
 
-Kalan: hasar, gerçek hitbox, menzil, `def_block_parry` penceresi, kaçış, dash-attack.
+Referans düşman: ölümsüz mızraklı asker, maks HP 20 (□ ile 10 vuruşta ölür).
+Kalan: gerçek hitbox kareleri, menzil, `def_block_parry` penceresi, kaçış i-frame'leri (gelen saldırı gerekir).
 Kaynak: `data/gos_framedata/blades.json`, `context/artifacts/2026-10-15/phase2-blades-framedata-FINAL.md`.
 
 ---
