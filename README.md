@@ -9,7 +9,8 @@ Arms of Sparta, magic, Rage of Sparta). Olympian boons keep working on Kratos' w
 > overrides Stygius in place (boon-compat preserved), live-verified in game. **Phase 2 🔄** —
 > GoS player struct located & verified live (HP/orbs/magic/position) via a CWCheat-seeded
 > MCP pointer-chase; first Blades frame data (□ string + △ heavy timings) measured from
-> PPSSPP frame dumps → `data/gos_framedata/blades.json`. Damage/hitbox/dodge still to measure.
+> PPSSPP frame dumps → `data/gos_framedata/blades.json`: Blades timings, damage, evade and
+> deflect window — Phase 2 done for Blades (awaiting approval).
 > **Phase 3 (visual) 🔄 started early** — textured Kratos mesh (posed + T-pose) rips from a PPSSPP
 > GE dump on your machine; skeleton/animation/render still to do. Plan position: `docs/DESIGN.md` §9.1.
 > Not yet playable as Kratos.

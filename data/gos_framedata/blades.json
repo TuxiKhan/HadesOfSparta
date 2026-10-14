@@ -269,7 +269,7 @@
       "hits": 0,
       "damage": null,
       "range": null,
-      "iframes": null,
+      "iframes": "likely (1 sample: rolling INTO the attacker ~8 f before the hit -> no damage); not proven",
       "cancel_window": null,
       "samples": {
         "run4_left": {
@@ -298,6 +298,37 @@
         }
       },
       "notes": "total 36-50 f depending on how 'settled' is judged; i-frames not measured (needs an incoming attack). Square right after the roll did not produce a distinct dash-attack"
+    },
+    {
+      "id": "block_parry",
+      "input": "L (tap = deflect, hold = block)",
+      "description": "def_block_parry; Hades SwordParry/Special candidate",
+      "startup_frames": 4,
+      "active_frames": 17,
+      "recovery_frames": null,
+      "hits": 0,
+      "damage": null,
+      "range": null,
+      "iframes": null,
+      "cancel_window": null,
+      "deflect_window_frames_before_hit": [
+        20,
+        4
+      ],
+      "samples": {
+        "tap_offsets_vs_hit": {
+          "-34": "hit",
+          "-24": "hit",
+          "-21": "hit",
+          "-18": "deflect",
+          "-14": "deflect",
+          "-10": "deflect",
+          "-6": "deflect",
+          "-2": "hit"
+        },
+        "hold_L_through_hit": "blocked"
+      },
+      "notes": "enemy spear hit is deterministic from the save state (identical CPU tick in 2 runs); tap timing is wall-clock (+-3 f). A 3-frame L tap produces a golden deflect burst if it starts ~20..4 f before the hit; the soldier's follow-up strike ~30 f later was deflected too"
     }
   ],
   "frame_to_seconds": 0.016683,
@@ -305,6 +336,7 @@
   "reference_enemy": {
     "name": "undead legionnaire (spear soldier, early GoS)",
     "max_hp": 20,
-    "hits_to_kill_square": 10
+    "hits_to_kill_square": 10,
+    "attack_damage_to_kratos": 5
   }
 }
