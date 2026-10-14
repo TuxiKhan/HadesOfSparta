@@ -1,15 +1,18 @@
 :: HadesOfSparta — Kratos (God of War: Ghost of Sparta) hero mod
 ::
-:: Phase 1: placeholder Kratos. Zagreus' sprites/animations are kept untouched;
-:: this mod only takes over the hero's weapon *in place* (SwordWeapon = Stygius)
-:: and applies placeholder Blades-of-Athena "feel". Internal weapon names are
+:: Phase 4: Blades of Athena. Zagreus' sprites/animations are still kept; the
+:: mod takes over the hero's weapon *in place* (SwordWeapon = Stygius) and writes
+:: measured GoS timings/damage (Config.lua) onto it. Internal weapon names are
 :: NEVER changed, so Olympian boons keep auto-attaching (DESIGN.md §4).
 ::
 :: Load Priority 1 => loads AFTER ModUtil / StyxScribe (priority 0), so
 :: ModUtil.* is available when our files run.
+:: Target is RoomManager.lua, NOT Main.lua: the gameplay scripts we wrap
+:: (Combat.lua, UpgradeManager.lua) are imported by RoomManager.lua, which the
+:: engine loads after Main.lua - a wrap placed in Main.lua gets overwritten.
 
 Load Priority 1
-To "Scripts/Main.lua"
+To "Scripts/RoomManager.lua"
 	Import "Config.lua"
 	Import "HeroKratos.lua"
 	Import "Weapons/Blades.lua"

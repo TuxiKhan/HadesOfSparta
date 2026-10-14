@@ -162,3 +162,6 @@ Kaynak: `data/gos_framedata/blades.json`, `context/artifacts/2026-10-15/phase2-b
   hedefleri isimlendirildi.
 - **2026-10-15:** §6.1 — ilk ölçülen Blades frame-data (□1–4, □5–10, △1) eklendi.
 - **2026-10-15:** §4 — düzeltilmiş GE rip ile T-pose Kratos notu.
+- **2026-10-15:** Phase 4 — §5 eşlemesi uygulandı: □1→`SwordWeapon`, □2(+□3)→`SwordWeapon2`,
+  □4→`SwordWeapon3`, △1→`SwordParry`. Deflect ve dash-attack bu turda taşınmadı
+  (bkz. `context/artifacts/2026-10-15/phase4-blades-FINAL.md`).

@@ -173,12 +173,16 @@ damage, true hitbox frames, range, dodge/parry/dash. Evidence:
 |---|---|---|
 | 0 discovery | toolchains proven | ✅ |
 | 1 placeholder Kratos | SwordWeapon override live-verified | ✅ |
-| **2 frame data** | GoS numbers for Blades in `data/gos_framedata/` | ✅ **done for Blades — awaiting approval** (`context/artifacts/2026-10-15/phase2-FINAL-report.md`): timings, damage, evade ~45 f, deflect window 20→4 f before hit. Not measured: true hitbox frames, range, proven i-frames, input latency (not blocking Phase 4) |
+| 2 frame data | GoS numbers for Blades in `data/gos_framedata/` | ✅ **done for Blades** (`context/artifacts/2026-10-15/phase2-FINAL-report.md`): timings, damage, evade ~45 f, deflect window 20→4 f before hit. Not measured: true hitbox frames, range, proven i-frames, input latency (not blocking Phase 4) |
 | 3 visual spike | capture method + silhouette oracle | 🔄 started early — method decided (GE capture), textured T-pose + posed Kratos mesh ✅ (rip fixed 10-15); **open:** skeleton hierarchy, animation clip capture, Blender render vs Zagreus silhouette/pivot, frame/VRAM budget |
-| 4 Blades + Thera's Bane | playable Blades combo in Hades | ⏳ needs Phase 2 numbers (+ 3 for visuals) |
+| **4 Blades + Thera's Bane** | playable Blades combo in Hades | 🔄 **Blades live-verified 2026-10-15** (`context/artifacts/2026-10-15/phase4-blades-FINAL.md`): measured startup/lock/damage written onto the `SwordWeapon` family per room, before traits (boons stack on top); engine readback PASS. **Open:** hands-on feel test, boon matrix, Thera's Bane (unmeasured + slot decision), deflect (→ Phase 5 with Aegis) |
 | 5 Arms of Sparta · 6 magic + Rage · 7 polish | — | ⏳ |
 
-Next concrete step (after approval): **Phase 4** — wire `blades.json` into `Config.lua` /
-`Weapons/Blades.lua` (SwordWeapon 1/2/3 timings + damage ratios, SwordParry = △ / deflect).
-Phase 3 visuals can proceed in parallel. Evidence for damage/evade:
-`context/artifacts/2026-10-15/phase2-damage-evade-FINAL.md`.
+Next concrete steps: (1) hands-on feel test of the Blades combo + `docs/BOON_MATRIX.md`;
+(2) Thera's Bane — measure in GoS, then decide its Hades slot (touches §6 → needs approval).
+Phase 3 visuals can proceed in parallel.
+
+**Mod load gotcha (2026-10-15):** gameplay wraps must be imported into
+`Scripts/RoomManager.lua`, not `Main.lua` — `Combat.lua`/`UpgradeManager.lua` are imported by
+RoomManager.lua after Main.lua and would overwrite the wrap. Engine readback of weapon
+properties: `GetWeaponDataValue` (not `GetWeaponProperty`).

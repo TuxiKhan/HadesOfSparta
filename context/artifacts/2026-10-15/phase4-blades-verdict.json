@@ -1,0 +1,44 @@
+{
+  "phase": 4,
+  "time": "2026-10-15T02:43:06",
+  "results": {
+    "HASSWORD": "true",
+    "APPLIED": "2",
+    "BOONSET": "true",
+    "CT_SwordWeapon": "0.18333333730698",
+    "DMG_SwordWeapon": "12",
+    "CT_SwordWeapon2": "0.066666670143604",
+    "DMG_SwordWeapon2": "12",
+    "CT_SwordWeapon3": "0.066666670143604",
+    "DMG_SwordWeapon3": "36",
+    "CT_SwordParry": "0.33333334326744",
+    "DMG_SwordParry": "48"
+  },
+  "expected": {
+    "HASSWORD": "true",
+    "BOONSET": "true",
+    "CT_SwordWeapon": 0.18333,
+    "CT_SwordWeapon2": 0.06667,
+    "CT_SwordWeapon3": 0.06667,
+    "CT_SwordParry": 0.33333,
+    "DMG_SwordWeapon": 12,
+    "DMG_SwordWeapon2": 12,
+    "DMG_SwordWeapon3": 36,
+    "DMG_SwordParry": 48,
+    "APPLIED": ">=1"
+  },
+  "checks": {
+    "HASSWORD": true,
+    "BOONSET": true,
+    "CT_SwordWeapon": true,
+    "CT_SwordWeapon2": true,
+    "CT_SwordWeapon3": true,
+    "CT_SwordParry": true,
+    "DMG_SwordWeapon": true,
+    "DMG_SwordWeapon2": true,
+    "DMG_SwordWeapon3": true,
+    "DMG_SwordParry": true,
+    "APPLIED": true
+  },
+  "pass": true
+}
