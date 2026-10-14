@@ -1,7 +1,7 @@
 # RESEARCH.md — tool & environment verification
 
 > Phase 0 evidence. Dates absolute. "Bilgi artefakta girmedi ise yok sayılır."
-> Last updated: 2026-10-13.
+> Last updated: 2026-10-15 (Phase 2/3 toolchain added in §2b).
 
 ## 1. Detected environment (this machine)
 
@@ -15,7 +15,7 @@
 | git | ✓ | 2.55.0 |
 | Python | ✓ | 3.14.7 (system) + project venv at `.venv` |
 | Node.js / npm | ✗ absent | Not needed — chose the Python PPSSPP MCP. |
-| Blender | ✗ absent | Deferred to Phase 3 (visual pipeline). Install then. |
+| Blender | ✓ 5.2.2 LTS | Steam (`steamapps/common/Blender`). Found 2026-10-14 for Phase 3; driven via blender MCP (§2b). |
 | winget | ✓ | used for PPSSPP; choco/scoop absent |
 
 ## 2. Installed this session
@@ -28,6 +28,20 @@
 | universal-modder | installed+enabled | user scope | Claude Code plugin (mashup-mods skill, publish check). Its bundled `fal` image MCP fails 401 (no token) — irrelevant to us, ignore/disable. |
 | Node.js | 22.23.2 (LTS) | winget `OpenJS.NodeJS.22` | Installed 2026-10-13 for REA (needs ≥22.19). PATH updated persistently; npm 10.9.8. (Was absent — PPSSPP MCP picked as Python to avoid it; now present.) |
 | REA (`rea-agents`) | 6.4.0 | npm via npx; repo clone `research/vendor/rea/` | "Reverse Engineer Anything" MCP. Registered in Claude Code **local** scope: `cmd /d /c npx -y rea-agents@6.4.0 mcp`. Starts on next Claude restart; **not yet smoke-tested** (auto-mode blocked executing npm-fetched code). Deep native analysis needs a provider (Ghidra/IDA/Hopper) — none yet. Useful for Phase-3 GoS PSP format RE (MIPS). |
+
+### 2b. Added for Phase 2/3 (2026-10-14 … 10-15)
+
+| Tool | Version | Where | Notes |
+|------|---------|-------|-------|
+| Ghidra + ghidra-allegrex | 12.1.3 + v21.4 | `research/vendor/{ghidra,ghidra-allegrex}` | PSP Allegrex (MIPS) loader; launcher `research/vendor/run_ghidra.bat`. Needs a decrypted EBOOT for code RE (not done yet). |
+| Temurin JDK | 21.0.12.1 | `research/vendor/jdk21` | for Ghidra |
+| god_of_war_browser | git | `research/vendor/god_of_war_browser` | built, but **PS2/PS3/Vita only — no PSP GoS** (format ideas only) |
+| mcp-for-blender | 2.1.9 (local clone) | `research/vendor/mcp-for-blender`, Blender addon in `%APPDATA%/Blender Foundation/Blender/5.2/scripts/addons` | MCP `blender` (user scope) → addon socket :9876, auto-starts with Blender |
+| uv | 0.13.1 | `~/.local/bin` | runs the blender MCP (`uvx`) |
+| ffmpeg | 9.0.2 (Gyan full) | winget `Gyan.FFmpeg` | decodes PPSSPP frame dumps for `tools/framedata/video_metrics.py` |
+
+PPSSPP settings in use: `CPUCore = 2` (IR interpreter — breakpoints fire), `FastMemoryAccess = False`.
+Frame dumps: `File > Record > Dump frames` (menu 40165, FFV1 40166) → `Documents/PPSSPP/PSP/VIDEO/`.
 
 Hades-side loaders staged (downloaded, **not yet injected** into the game) under
 `research/vendor/extracted/` (gitignored):

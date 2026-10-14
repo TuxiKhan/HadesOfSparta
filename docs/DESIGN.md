@@ -24,13 +24,17 @@ core constraint.
 ## 3. Architecture
 
 ```
-[User's GoS ISO] --(PPSSPP + GE capture / format RE)--> tools/extract/  (mesh+skeleton+anim -> glTF)
+[User's GoS ISO] --(Pack/RADI format RE)--> tools/pack/   radpack.py · radi2png.py · cfcm_*.py   ✅
+                 --(PPSSPP GE frame dump)--> tools/rip/    gedump.py → ge_textured.py (OBJ/glTF,
+                                                           posed or bind/T-pose)            ✅
         v
-tools/render/ (Blender bpy, Hades hero angles/scale/light) --> sprite atlas + anim SJSON
+tools/render/  (TODO: Blender bpy, Hades hero angles/scale/light) --> sprite atlas + anim SJSON
         v
-tools/pack/ (deppth2) --> Hades .pkg   [built on user's machine, NOT in repo]
+Hades .pkg via deppth2 (TODO)   [built on user's machine, NOT in repo]
 
-[PPSSPP MCP measurement] --> data/gos_framedata/*.json  (numbers only: frames, dmg, range, i-frames)
+[PPSSPP measurement] --> tools/framedata/ (frame-dump video metrics) + ppsspp-dfx MCP memory
+        v
+data/gos_framedata/*.json  (numbers only: frames, dmg, range, i-frames)   🔄 blades.json
         v
 mod/ (Lua + SJSON, modimporter format)
    HeroKratos.lua · Weapons/{Blades,Spear,Shield}.lua · TherasBane.lua
@@ -116,6 +120,15 @@ Two candidate capture paths, decided by a small timed spike, not up front:
 - **B. Format RE:** decode GoS's model/animation archive via Ghidra + memory reads.
   (`mogaika/god_of_war_browser` is PS2/PS3/Vita GoW1-2 only — no PSP GoS support — but useful
   for format ideas.)
+**Spike result (2026-10-14/15): A (GE frame capture) chosen**, with B's Pack/RADI decoding kept
+for textures + names. One PPSSPP GE dump yields the full textured Kratos mesh; `--pose bind` gives
+a clean **T-pose** (vertices in bind space), `--pose posed` the frame's pose (bones × world).
+⚠️ 2026-10-15 correction: earlier rips read the wrong GE registers (VIEW matrix as world,
+VIEWPORT scale as bones, TEXFUNC as CLUT format) → skinning was never applied and the exported
+"Kratos" was actually a different skinned character. The "single frame only captures the
+camera-facing shell → needs multi-angle capture" conclusion was a symptom of that bug, not a data
+limit. Still open: skeleton/joint hierarchy for rigging (bone palette per draw is in the dump;
+joint names in CfCm), animations (per-frame bone matrices → clip capture).
 Oracle for the render: automated Kratos-vs-Zagreus silhouette-height / pivot comparison.
 Budget risk: a single Hades hero attack is hundreds of frames × directions — prioritize an
 animation list and measure disk/VRAM before committing.
@@ -153,3 +166,18 @@ exact) + `tools/framedata/video_metrics.py`. Blades □1–□4 (+ extended □5
 startup / visual-active / recovery are in `data/gos_framedata/blades.json`. Still open:
 damage, true hitbox frames, range, dodge/parry/dash. Evidence:
 `context/artifacts/2026-10-15/phase2-blades-framedata-FINAL.md`.
+
+### 9.1 Where we are (2026-10-15)
+
+| Phase | Gate | State |
+|---|---|---|
+| 0 discovery | toolchains proven | ✅ |
+| 1 placeholder Kratos | SwordWeapon override live-verified | ✅ |
+| **2 frame data** | GoS numbers for Blades in `data/gos_framedata/` | 🔄 **current** — struct ✅, Blades □/△ timings ✅; **open:** damage, true hitbox frames, range, evade (L+R+stick), block/parry window (`def_block_parry`), dash-attack, input latency / combo window |
+| 3 visual spike | capture method + silhouette oracle | 🔄 started early — method decided (GE capture), textured T-pose + posed Kratos mesh ✅ (rip fixed 10-15); **open:** skeleton hierarchy, animation clip capture, Blender render vs Zagreus silhouette/pivot, frame/VRAM budget |
+| 4 Blades + Thera's Bane | playable Blades combo in Hades | ⏳ needs Phase 2 numbers (+ 3 for visuals) |
+| 5 Arms of Sparta · 6 magic + Rage · 7 polish | — | ⏳ |
+
+Next concrete step: an **enemy-scene save state** in GoS → same frame-dump method + enemy HP /
+orb deltas gives damage and real hit frames; then evade/parry. Phase 2 closes with a Turkish
+report + approval (§2).

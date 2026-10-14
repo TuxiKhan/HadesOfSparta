@@ -7,7 +7,9 @@ Format (little-endian), reverse-engineered from the retail USA GoS UMD:
   0x04  u32      version   (observed 0x00020004)
   0x08  u32      id / build hash
   0x0C  u32      entry_count
-  0x10  0x30 bytes  secondary header (preserved verbatim; 0x28 ~ data-size field)
+  0x10  0x30 bytes  secondary header (preserved verbatim, except:)
+  0x28  u32      data end = end of the last blob, rounded up to 16
+  ...   after that offset: a trailer (116..1828 B seen on Kratos packs) - preserved verbatim
   0x40  entry[entry_count] { u32 nameHash; u32 offset; u32 size; u32 flags }
         -> entries are sorted ascending by nameHash (binary search by hashed name)
   data  blobs, each starting at its offset, 16-byte aligned, padded between blobs.
@@ -16,7 +18,8 @@ Format (little-endian), reverse-engineered from the retail USA GoS UMD:
 Commands:
   info      <pack.bin>
   extract   <pack.bin> <out_dir>           # writes blobs + manifest.json (+ padding, for exact round-trip)
-  repack    <in_dir> <out.bin>             # rebuild from manifest.json, resize-aware (recomputes offsets & 0x28)
+  repack    <in_dir> <out.bin>             # rebuild from manifest.json, resize-aware (recomputes offsets &
+                                           #   0x28, re-aligns blobs to 16, keeps the trailer)
   roundtrip <pack.bin>                     # extract to temp, repack, assert byte-identical
 """
 import sys, os, json, struct, hashlib, tempfile, shutil, re
@@ -75,10 +78,13 @@ def cmd_extract(path, out_dir):
             fh.write(blob)
         man_entries.append(dict(index=e['index'], hash=e['hash'], flags=e['flags'],
                                 file=fn, pad_hex=pad.hex()))
+    data_end = struct.unpack_from('<I', data, 0x28)[0]
     manifest = dict(version=version, id=pid, count=count,
                     prefix_hex=prefix.hex(),
                     data_start=data_start,
-                    size_field_0x28=struct.unpack_from('<I', data, 0x28)[0],
+                    size_field_0x28=data_end,
+                    file_size=len(data),
+                    trailer_hex=data[data_end:].hex(),
                     entries=man_entries)
     with open(os.path.join(out_dir, 'manifest.json'), 'w') as fh:
         json.dump(manifest, fh, indent=1)
@@ -110,9 +116,10 @@ def cmd_repack(in_dir, out_path, exact=True):
         struct.pack_into('<IIII', out, TABLE_OFF + i * REC,
                          me['hash'], off, size, me['flags'])
     if not exact:
-        # update 0x28 data-size field the same way the original relates to file size
-        struct.pack_into('<I', out, 0x28, len(out) - (len(out) - man['size_field_0x28'] if False else 0))
-        # NOTE: 0x28 semantics kept as original delta; for resize mods verify in-game.
+        if 'trailer_hex' not in man:
+            sys.exit("manifest predates trailer support - re-run `extract` before a resize repack")
+        struct.pack_into('<I', out, 0x28, len(out))     # data end (already 16-aligned above)
+        out += bytes.fromhex(man['trailer_hex'])
     with open(out_path, 'wb') as fh:
         fh.write(out)
     print(f"repacked {count} blobs -> {out_path} ({len(out)} bytes)")

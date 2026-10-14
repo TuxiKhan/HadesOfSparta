@@ -96,9 +96,13 @@ EXP_L1_Clav1   EXP_L1_Arm1
 EXP_R1_Clav1   EXP_R1_Arm1  EXP_R1_Arm2  EXP_R1_Hand1
 ```
 
-> Standart RAD-engine humanoid adlandırması. Phase 6'da GE-capture bone-matrix paleti bu
-> joint'lere kalibre edilecek (render pivot/scale oracle'ı için). Tam hiyerarşi geometri
-> blob'u çözülünce (`0026_…`) netleşir.
+> Standart RAD-engine humanoid adlandırması. GE-capture bone-matrix paleti bu joint'lere
+> kalibre edilecek (render pivot/scale oracle'ı için). Tam hiyerarşi geometri blob'u
+> (`0026_…`) veya dump'taki per-draw bone paletinden netleşir.
+>
+> **2026-10-15:** düzeltilmiş GE rip (`tools/rip/gedump.py`, `ge_textured.py --pose bind`)
+> Kratos'u **T-pozda** (bind uzayı; 5806 vertex, 7 doku) veriyor — rig için doğrudan taban.
+> Önceki rip'ler register hatası yüzünden yanlış karakterdi (bkz. DESIGN §7).
 
 ---
 
@@ -155,3 +159,4 @@ Kaynak: `data/gos_framedata/blades.json`, `context/artifacts/2026-10-15/phase2-b
   telif-güvenli biçimde repoya alındı; Blades (Phase 4) slot eşlemesi + Phase 2 frame-data
   hedefleri isimlendirildi.
 - **2026-10-15:** §6.1 — ilk ölçülen Blades frame-data (□1–4, □5–10, △1) eklendi.
+- **2026-10-15:** §4 — düzeltilmiş GE rip ile T-pose Kratos notu.
