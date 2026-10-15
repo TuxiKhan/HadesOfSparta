@@ -174,8 +174,8 @@ damage, true hitbox frames, range, dodge/parry/dash. Evidence:
 | 0 discovery | toolchains proven | ✅ |
 | 1 placeholder Kratos | SwordWeapon override live-verified | ✅ |
 | 2 frame data | GoS numbers for Blades in `data/gos_framedata/` | ✅ **done for Blades** (`context/artifacts/2026-10-15/phase2-FINAL-report.md`): timings, damage, evade ~45 f, deflect window 20→4 f before hit. Not measured: true hitbox frames, range, proven i-frames, input latency (not blocking Phase 4) |
-| 3 visual spike | capture method + silhouette oracle | 🔄 started early — method decided (GE capture), textured T-pose + posed Kratos mesh ✅ (rip fixed 10-15); **open:** skeleton hierarchy, animation clip capture, Blender render vs Zagreus silhouette/pivot, frame/VRAM budget |
-| **4 Blades** | playable Blades combo in Hades | 🔄 **Blades live-verified 2026-10-15** (`context/artifacts/2026-10-15/phase4-blades-FINAL.md`): measured startup/lock/damage written onto the `SwordWeapon` family per room, before traits (boons stack on top); engine readback PASS. **Open:** hands-on feel test, boon matrix, deflect (→ Phase 5 with Aegis) |
+| **3 visual** | capture method + silhouette oracle | 🔄 **active** — GE capture; **animation = consecutive GE dumps** (`capture_anim.py` → `anim_extract.py`): □ combo with chains + fire trails rendered in Blender ✅ (`context/artifacts/2026-10-15/phase3-anim-capture-FINAL.md`). **Open:** △/dash/idle/run clips, Hades camera/scale oracle vs Zagreus, sprite sheets + .pkg packaging, frame/VRAM budget |
+| 4 Blades | playable Blades combo in Hades | ✅ **approved 2026-10-15** · live-verified (`context/artifacts/2026-10-15/phase4-blades-FINAL.md`): measured startup/lock/damage written onto the `SwordWeapon` family per room, before traits (boons stack on top); engine readback PASS. **Open:** hands-on feel test, boon matrix, deflect (→ Phase 5 with Aegis) |
 | 5 Arms of Sparta · 6 magic + Rage · 7 polish | — | ⏳ |
 
 Next concrete steps: (1) hands-on feel test of the Blades combo + `docs/BOON_MATRIX.md`;

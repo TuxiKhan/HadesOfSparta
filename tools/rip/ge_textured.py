@@ -12,7 +12,7 @@ Decoding (bones/world/CLUT registers) lives in gedump.py.
 import argparse, os, sys, struct, zlib, hashlib, json
 sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from gedump import draws, clusters, describe  # noqa: E402
+from gedump import centroid, draws, clusters, describe  # noqa: E402
 
 
 def unswz(data,wb,h):
@@ -71,15 +71,32 @@ def wpng(path,w,h,rgba):
     for y in range(h): raw.append(0); raw+=rgba[y*w*4:(y+1)*w*4]
     open(path,'wb').write(b'\x89PNG\r\n\x1a\n'+ch(b'IHDR',struct.pack('>IIBBBBB',w,h,8,6,0,0,0))+ch(b'IDAT',zlib.compress(bytes(raw),9))+ch(b'IEND',b''))
 
-def run(path, outdir, pose="posed", cluster=0):
+def tex_hash(d):
+    """Short id of a draw's texture data (stable across frames) or None."""
+    if not d['tex']: return None
+    return hashlib.md5(d['pb'][d['tex'][0]:d['tex'][0] + d['tex'][1]]).hexdigest()[:6]
+
+
+def run(path, outdir, pose="posed", cluster=0, extra_tex=(), margin=0.5):
+    """extra_tex: texture ids (tex_hash) of RIGID draws to add when they lie inside the hero's
+    posed bbox (+margin) — e.g. the Blades' chain links, which GoS draws unskinned."""
     os.makedirs(outdir, exist_ok=True)
     texdir = os.path.join(outdir, 'textures'); os.makedirs(texdir, exist_ok=True)
     texcache = {}; tex_list = []; body = []
-    posed = [d for d in draws(path, "posed") if d['skinned']]
+    alld = list(draws(path, "posed"))
+    posed = [d for d in alld if d['skinned']]
     pick = sorted(clusters(posed)[cluster])
     src = posed if pose == "posed" else [d for d in draws(path, "bind") if d['skinned']]
     ds = [src[i] for i in pick]
     print(f"[{pose}] cluster {cluster}: {describe(posed, pick)}")
+    if extra_tex and pose == "posed":
+        V = [v for d in ds for v in d['verts']]
+        bb = [(min(v[a] for v in V) - margin, max(v[a] for v in V) + margin) for a in range(3)]
+        for d in alld:
+            if d['skinned'] or tex_hash(d) not in extra_tex: continue
+            c = centroid(d)
+            if all(bb[a][0] <= c[a] <= bb[a][1] for a in range(3)):
+                ds.append(d)
     for d in ds:
         tkey = None
         if d['tex']:
